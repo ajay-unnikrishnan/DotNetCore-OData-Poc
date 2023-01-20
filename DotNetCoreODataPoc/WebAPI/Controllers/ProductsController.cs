@@ -1,10 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using WebAPI.DataAccess.Interfaces;
+using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
@@ -13,15 +10,22 @@ namespace WebAPI.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        [HttpGet]
-        public IEnumerable<Product> Get()
+        private readonly IProductStore _productStore;
+        public ProductsController(IProductStore productStore)
         {
-            return Enumerable.Range(1, 5).Select(index => new Product
-            {
-                Id = index,
-                Name = "Product" + index
-
-            }).ToList();
+            _productStore = productStore;
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAsync()
+        {
+            var store = await _productStore.GetAsync();
+            return Ok(store);
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateAsync(Product product)
+        {
+            var result = await _productStore.CreateAsync(product);
+            return Ok(result);
         }
     }
 }
