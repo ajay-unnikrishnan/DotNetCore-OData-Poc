@@ -10,10 +10,12 @@ namespace WebAPI.DataAccess
 
         }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Product>().ToTable("Products");
+            modelBuilder.Entity<Supplier>().ToTable("Suppliers");
         }
     }
 }
