@@ -38,6 +38,7 @@ namespace WebAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
             });
             services.AddScoped<IProductStore, ProductStore>();
+            services.AddScoped<ISupplierStore, SupplierStore>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
