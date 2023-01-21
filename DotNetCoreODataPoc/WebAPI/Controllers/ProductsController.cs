@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNet.OData;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WebAPI.DataAccess.Interfaces;
 using WebAPI.Models;
@@ -16,6 +17,7 @@ namespace WebAPI.Controllers
             _productStore = productStore;
         }
         [HttpGet]
+        [EnableQuery]
         public async Task<IActionResult> GetAsync()
         {
             var store = await _productStore.GetAsync();

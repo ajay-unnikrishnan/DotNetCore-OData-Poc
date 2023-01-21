@@ -9,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.DataAccess;
 using WebAPI.DataAccess.Interfaces;
+using Microsoft.AspNet.OData.Extensions;
 
 namespace WebAPI
 {
@@ -32,7 +33,8 @@ namespace WebAPI
                 
                 );
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();            
+            services.AddOData();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
@@ -59,9 +61,11 @@ namespace WebAPI
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
-            {
+            {               
                 endpoints.MapControllers();
+                endpoints.EnableDependencyInjection();
+                endpoints.Select().Filter().Expand().Count().OrderBy().MaxTop(100);               
             });
-        }
+        }       
     }
 }
