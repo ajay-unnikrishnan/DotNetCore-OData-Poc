@@ -19,8 +19,9 @@ To run the project locally:
 
 <br/>  
 
-Database:
-By default it connects to the localdb. Modify the appsettings.json file to connect it to a different database.
+Database:<br/>
+By default it connects to the localdb. Modify the appsettings.json file to connect it to a different database. <br/>
+Added some detault data to the tables. Use swagger to add more data to using the POST api.
 
 <br/>
 
