@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WebAPI.DataAccess.ModelConfigurations;
 using WebAPI.Models;
 
 namespace WebAPI.DataAccess
@@ -14,8 +15,22 @@ namespace WebAPI.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Product>().ToTable("Products");
+            modelBuilder.ApplyConfiguration(new ProductConfiguration()); // Configurations also can be added in a seperate class
+            
             modelBuilder.Entity<Supplier>().ToTable("Suppliers");
+            modelBuilder.Entity<Supplier>()
+                .HasData(
+                    new Supplier
+                    { 
+                        SupplierId = 1,
+                        Name = "Supplier1"
+                    },
+                    new Supplier
+                    {
+                        SupplierId = 2,
+                        Name = "Supplier2"
+                    }
+                );
         }
     }
 }

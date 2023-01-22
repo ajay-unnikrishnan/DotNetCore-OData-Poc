@@ -25,8 +25,8 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
+            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            //    .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
 
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("AppDb"))
@@ -64,7 +64,7 @@ namespace WebAPI
             {               
                 endpoints.MapControllers();
                 endpoints.EnableDependencyInjection();
-                endpoints.Select().Filter().Expand().Count().OrderBy().MaxTop(100);               
+                endpoints.Expand().Select().Count().OrderBy().Filter().MaxTop(100);               
             });
         }       
     }
