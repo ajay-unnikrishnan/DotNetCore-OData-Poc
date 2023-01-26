@@ -29,7 +29,7 @@ Sample Queries:
 
 This project consists of 2 entities Product and Supplier with a one to many mapping.
 
-Number Filter: https://localhost:5001/api/Products?$filter=supplierId eq 3
+Number Filter: https://localhost:5001/api/Products?$filter=supplierId eq 2
 
 String Filter: https://localhost:5001/api/Products?$filter=name eq 'Product3'
 
