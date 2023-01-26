@@ -42,18 +42,20 @@ Sort: https://localhost:5001/api/Products?$orderby=Id desc
 Skip and Top: https://localhost:5001/api/Products?$orderby=Id desc&$top=2&$skip=1
 
 Change the url based on the port which the app runs.
-
-Findings:
-
-When we return IEnumerable from the datastore (like Repository Pattern), the filtering is happening in the server, ie all the data loaded to webserver and executing the filter condition in the server.
-But when we use IQueryable from the DataAccess Layer, the filters will be passed to the database and the datafiltering will takeplace in the database which will improve the performance.
-<br/>
-Query passed to the database:<br/><br/>
-IEnumberable:<br/>
-SELECT [p].[Id], [p].[IsActive], [p].[Name], [p].[Price], [p].[SupplierId]
-FROM [Products] AS [p]
 <br/><br/>
-IQueryable:<br/>
-exec sp_executesql N'SELECT [p].[Id], [p].[IsActive], [p].[Name], [p].[Price], [p].[SupplierId]
+Findings:
+<br/>
+When returning an IEnumerable from the datastore (like the Repository Pattern), filtering occurs on the server, causing all data to be loaded onto the web server and the filter conditions to be executed there. However, utilizing IQueryable from the Data Access Layer allows for the filters to be passed directly to the database, resulting in improved performance by conducting the data filtering at the source.
+<br/>
+Entity Framework Generated Database Query:<br/><br/>
+When returning IEnumberable:<br/>
+API: https://localhost:5001/api/Products?$filter=supplierId eq 2 // uses IEnumerable <br/>
+SELECT [p].[Id], [p].[IsActive], [p].[Name], [p].[Price], [p].[SupplierId] <br/>
 FROM [Products] AS [p]
+<br/>
+
+When returning IQueryable:<br/>
+API: https://localhost:44386/api/Products/GetProducts?$filter=supplierId eq 2 //uses IQueryable <br/>
+exec sp_executesql N'SELECT [p].[Id], [p].[IsActive], [p].[Name], [p].[Price], [p].[SupplierId] <br/>
+FROM [Products] AS [p] <br/>
 WHERE [p].[SupplierId] = @__TypedProperty_0',N'@__TypedProperty_0 int',@__TypedProperty_0=2
