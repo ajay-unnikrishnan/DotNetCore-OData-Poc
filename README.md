@@ -42,3 +42,17 @@ Sort: https://localhost:5001/api/Products?$orderby=Id desc
 Skip and Top: https://localhost:5001/api/Products?$orderby=Id desc&$top=2&$skip=1
 
 Change the url based on the port which the app runs.
+
+Findings:
+
+When we return IEnumerable from the datastore (like Repository Pattern), the filtering is happening in the server, ie all the data loaded to webserver and executing the filter condition in the server.
+But when we use IQueryable from the DataAccess Layer, the filters will be passed to the database and the datafiltering will takeplace in the database which will improve the performance.
+Query passed to the database:
+IEnumberable:
+SELECT [p].[Id], [p].[IsActive], [p].[Name], [p].[Price], [p].[SupplierId]
+FROM [Products] AS [p]
+
+IQueryable:
+exec sp_executesql N'SELECT [p].[Id], [p].[IsActive], [p].[Name], [p].[Price], [p].[SupplierId]
+FROM [Products] AS [p]
+WHERE [p].[SupplierId] = @__TypedProperty_0',N'@__TypedProperty_0 int',@__TypedProperty_0=2
