@@ -29,6 +29,9 @@ namespace WebAPI.Controllers
             var result = await _store.CreateAsync(supplier);
             return Ok(result);
         }
+        [HttpGet("GetSuppliers"), EnableQuery]
+        public IActionResult GetSuppliersQueryable() => Ok(_store.GetSuppliers());
+
     }
 }
 

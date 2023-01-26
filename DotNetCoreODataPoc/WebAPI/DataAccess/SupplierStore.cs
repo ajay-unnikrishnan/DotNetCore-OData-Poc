@@ -21,10 +21,12 @@ namespace WebAPI.DataAccess
             await _context.SaveChangesAsync();
             return supplier;
         }
-
         public async Task<IEnumerable<Supplier>> GetAsync()
         {
             return await _context.Suppliers.ToListAsync();
         }
+
+        public IQueryable<Supplier> GetSuppliers() => 
+            _context.Suppliers;
     }
 }

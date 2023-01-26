@@ -29,5 +29,11 @@ namespace WebAPI.Controllers
             var result = await _productStore.CreateAsync(product);
             return Ok(result);
         }
+        [HttpGet("GetProducts"), EnableQuery]        
+        public IActionResult GetProductsQueryable()
+        {
+            var result =  _productStore.GetProducts();
+            return Ok(result);
+        }
     }
 }

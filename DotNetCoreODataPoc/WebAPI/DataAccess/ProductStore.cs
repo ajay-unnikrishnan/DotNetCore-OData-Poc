@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using WebAPI.DataAccess.Interfaces;
 using WebAPI.Models;
@@ -22,6 +23,10 @@ namespace WebAPI.DataAccess
             _context.Products.Add(_product);
             await _context.SaveChangesAsync();
             return _product;
+        }
+        public IQueryable<Product> GetProducts()
+        {
+            return _context.Products;
         }
     }
 }
