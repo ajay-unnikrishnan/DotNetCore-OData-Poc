@@ -54,14 +54,14 @@ When returning an IEnumerable from the datastore (like the Repository Pattern), 
 
 ### Entity Framework Generated Database Query:
 #### When returning IEnumberable:
-API: https://localhost:5001/api/Products?$filter=supplierId eq 2 // uses IEnumerable 
+API: `https://localhost:5001/api/Products?$filter=supplierId eq 2` // uses IEnumerable 
 
 DB Query: SELECT [p].[Id], [p].[IsActive], [p].[Name], [p].[Price], [p].[SupplierId] 
 FROM [Products] AS [p]
 
 
 #### When returning IQueryable:<br/>
-API: https://localhost:44386/api/Products/GetProducts?$filter=supplierId eq 2 //uses IQueryable 
+API: `https://localhost:44386/api/Products/GetProducts?$filter=supplierId eq 2` //uses IQueryable 
 
 DB Query: exec sp_executesql N'SELECT [p].[Id], [p].[IsActive], [p].[Name], [p].[Price], [p].[SupplierId] 
 FROM [Products] AS [p] 
