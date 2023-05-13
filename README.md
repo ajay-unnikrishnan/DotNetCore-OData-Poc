@@ -16,7 +16,7 @@ Demo project to integrate OData with .Net Core 5
 1. Download the source code
 2. Build the code
 3. Open Tools => Package Manager Console.
-    Enter the command "Update-Database" // This will update the database schema
+    Enter the command "Update-Database" // This command will update the database schema
 4. Run the project directly from the IDE or create a docker image and run
 
 
