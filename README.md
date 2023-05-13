@@ -1,5 +1,4 @@
-# DotNetCore-OData-Demo
-Demo project to integrate OData with .Net Core 5
+# Demo project to integrate OData with .Net Core 5
 
 
 
